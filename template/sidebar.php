@@ -90,9 +90,9 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="?page=perguntas">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Tabelas</span></a>
+                    <span>Perguntas</span></a>
             </li>
 
             <!-- Divider -->
