@@ -1,10 +1,6 @@
 <!-- Page Heading -->
 <?php 
 include "app\operacoes\pesquisa.operacoes.php";
-
-echo "<em>";
-print_r($listarPesquisa[0]);
-exit;
 ?>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">
@@ -13,7 +9,7 @@ exit;
 </div>
 
 <div class="row">
-<form class="form-inline">
+<form class="form-inline" action="app\operacoes\pesquisa.operacoes.php">
   <div class="form-group mx-sm-3 mb-2">
     <label for="inputNome" class="sr-only">Nome</label>
     <input type="text" class="form-control" id="inputNome" placeholder="Nome">
@@ -39,6 +35,7 @@ exit;
     <label for="inputPopulacao" class="sr-only">População</label>
     <input type="number" class="form-control" id="inputPopulacao" placeholder="População">
   </div>
+  <input type="hidden" id="" name="operacao" value="1">
   <button type="submit" class="btn btn-primary mb-2">Enviar</button>
 </form>
 </div>
@@ -61,7 +58,7 @@ exit;
 
   <?php foreach($listarPesquisa as $chave => $pesquisa) { ?>
     <tr>
-      <td><?php echo $pesquisa[$chave]['id_pesq']?></td>
+      <td><?php echo $pesquisa['id_pesq']?></td>
       <td>---</td>
       <td>01/01/2022</td>
       <td>01/01/2023</td>
