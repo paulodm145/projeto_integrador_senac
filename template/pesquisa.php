@@ -2,9 +2,6 @@
 <?php 
 include "app\operacoes\pesquisa.operacoes.php";
 
-echo "<em>";
-print_r($listarPesquisa[0]);
-exit;
 ?>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">
@@ -61,12 +58,12 @@ exit;
 
   <?php foreach($listarPesquisa as $chave => $pesquisa) { ?>
     <tr>
-      <td><?php echo $pesquisa[$chave]['id_pesq']?></td>
-      <td>---</td>
-      <td>01/01/2022</td>
-      <td>01/01/2023</td>
-      <td>Empresa A</td>
-      <td>100</td>
+      <td><?php echo $pesquisa['id_pesq']?></td>
+      <td><?php echo $pesquisa['nome_pesq']?></td>
+      <td><?php echo date('d/m/Y', strtotime($pesquisa['data_fim']))?></td>
+      <td><?php echo date('d/m/Y', strtotime($pesquisa['data_fim']))?></td>
+      <td><?php echo $pesquisa['empresa']?></td>
+      <td><?php echo $pesquisa['populacao']?></td>
       <td>
         <button type="button" class="btn btn-primary">Editar</button>
         <button type="button" class="btn btn-danger">Excluir</button>

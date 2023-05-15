@@ -37,6 +37,6 @@ class Conexao {
             die('Erro ao consultar');
         }
 
-        return mysqli_fetch_all($result);
+        return  mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 }
