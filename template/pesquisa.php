@@ -1,6 +1,10 @@
 <!-- Page Heading -->
 <?php 
+
+include "app\config\config.php";
 include "app\operacoes\pesquisa.operacoes.php";
+include "app".DIRECTORY_SEPARATOR."operacoes".DIRECTORY_SEPARATOR."empresas.operacoes.php";
+
 ?>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">
@@ -9,33 +13,38 @@ include "app\operacoes\pesquisa.operacoes.php";
 </div>
 
 <div class="row">
-<form class="form-inline" action="app\operacoes\pesquisa.operacoes.php">
+<form class="form-inline" method="POST" action="<?=$config["url"]."?page=pesquisa"?>">
   <div class="form-group mx-sm-3 mb-2">
     <label for="inputNome" class="sr-only">Nome</label>
-    <input type="text" class="form-control" id="inputNome" placeholder="Nome">
+    <input name="nome_pesq" type="text" class="form-control" id="inputNome" placeholder="Nome">
   </div>
   <div class="form-group mx-sm-3 mb-2">
     <label for="inputDataInicio" class="sr-only">Data Início</label>
-    <input type="date" class="form-control" id="inputDataInicio" placeholder="Data Início">
+    <input name="data_inicio" type="date" class="form-control" id="inputDataInicio" placeholder="Data Início">
   </div>
   <div class="form-group mx-sm-3 mb-2">
     <label for="inputDataFim" class="sr-only">Data Fim</label>
-    <input type="date" class="form-control" id="inputDataFim" placeholder="Data Fim">
+    <input name="data_fim" type="date" class="form-control" id="inputDataFim" placeholder="Data Fim">
   </div>
   <div class="form-group mx-sm-3 mb-2">
     <label for="selectEmpresa" class="sr-only">Empresa</label>
-    <select class="form-control" id="selectEmpresa">
-      <option value="">Selecione uma empresa</option>
-      <option value="empresa1">Empresa 1</option>
-      <option value="empresa2">Empresa 2</option>
-      <option value="empresa3">Empresa 3</option>
+    <select name='empresa' class="form-control" id="selectEmpresa">
+
+      <option value=""  disabled selected>Selecione uma empresa</option>
+
+      <?php foreach($listarEmpresas as $empresa){?>
+
+      <option value=<?=$empresa['empresa']?>><?=$empresa['fantasia']?></option>
+
+      <?php } ?>
+
     </select>
   </div>
   <div class="form-group mx-sm-3 mb-2">
     <label for="inputPopulacao" class="sr-only">População</label>
-    <input type="number" class="form-control" id="inputPopulacao" placeholder="População">
+    <input name="populacao" type="number" class="form-control" id="inputPopulacao" placeholder="População">
   </div>
-  <input type="hidden" id="" name="operacao" value="1">
+  <!-- <input type="hidden" id="" name="operacao" value="1"> -->
   <button type="submit" class="btn btn-primary mb-2">Enviar</button>
 </form>
 </div>
@@ -45,10 +54,10 @@ include "app\operacoes\pesquisa.operacoes.php";
 <table class="table table-striped table-bordered mt-3">
   <thead class="thead-dark">
   <tr>
-      <th scope="col">Item</th>
-      <th scope="col">Nome</th>
-      <th scope="col">Data Início</th>
-      <th scope="col">Data Fim</th>
+      <th scope="col">ID</th>
+      <th scope="col">Nome da Pesquisa</th>
+      <th scope="col">Data de Início</th>
+      <th scope="col">Data Final</th>
       <th scope="col">Empresa</th>
       <th scope="col">População</th>
       <th scope="col">Ações</th>
@@ -59,14 +68,14 @@ include "app\operacoes\pesquisa.operacoes.php";
   <?php foreach($listarPesquisa as $chave => $pesquisa) { ?>
     <tr>
       <td><?php echo $pesquisa['id_pesq']?></td>
-      <td>---</td>
-      <td>01/01/2022</td>
-      <td>01/01/2023</td>
-      <td>Empresa A</td>
-      <td>100</td>
+      <td><?=$pesquisa['nome_pesq']?></td>
+      <td><?=date('d/m/Y', strtotime($pesquisa['data_inicio']))?></td>
+      <td><?=date('d/m/Y', strtotime($pesquisa['data_fim']))?></td>
+      <td><?=$pesquisa['fantasia']?></td>
+      <td><?=$pesquisa['populacao']?></td>
       <td>
-        <button type="button" class="btn btn-primary">Editar</button>
-        <button type="button" class="btn btn-danger">Excluir</button>
+        <a href="" class="btn btn-primary">Editar</a>
+        <a href="" class="btn btn-danger">Excluir</a>
       </td>
     </tr>
     <?php } ?>
