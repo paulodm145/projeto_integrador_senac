@@ -40,7 +40,7 @@ class Conexao {
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
-    public function runq(string $query) {
+    public function runQuery(string $query) {
         $conn = $this->conexao();
         $result = mysqli_query($conn, $query);
 
@@ -49,6 +49,11 @@ class Conexao {
         }
 
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+
+    public function insertQuery(string $query) {
+        $conn = $this->conexao();
+        mysqli_query($conn, $query);
     }
 }
 

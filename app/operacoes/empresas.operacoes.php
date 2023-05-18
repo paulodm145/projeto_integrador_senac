@@ -6,4 +6,4 @@ $query = "SELECT DISTINCT eu.empresa, e.fantasia
           ON eu.empresa = e.id_emp
           WHERE eu.usuario = ".$_SESSION['id'];
 
-$listarEmpresas = $conexao->runq($query);
+$listarEmpresas = $conexao->runQuery($query);
