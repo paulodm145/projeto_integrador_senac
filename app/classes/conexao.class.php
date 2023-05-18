@@ -35,6 +35,7 @@ class Conexao {
         
         if (!$result) {
             die('Erro ao consultar !!!');
+
         }
         
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
