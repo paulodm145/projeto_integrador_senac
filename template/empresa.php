@@ -9,26 +9,31 @@ include "app".DIRECTORY_SEPARATOR."operacoes".DIRECTORY_SEPARATOR."empresa.opera
 </div>
 
 <div class="row">
-  
-<form class="form-inline" action="app\operacoes\pesquisa.operacoes.php">
+
+<form class="form-inline" method="POST" action="<?=$config["url"]?>/app/operacoes/empresa.action.php">
   <div class="form-group mx-sm-3 mb-2">
     <label for="inputRazaoSocial" class="sr-only">Razão social</label>
-    <input type="text" class="form-control" id="inputRazaoSocial" placeholder="Razão social">
+    <input type="text" class="form-control" name="razao" id="razao" placeholder="Razão social" required>
   </div>
   <div class="form-group mx-sm-3 mb-2">
     <label for="inputNomeFantasia" class="sr-only">Nome fantasia</label>
-    <input type="text" class="form-control" id="inputNomeFantasia" placeholder="Nome fantasia">
+    <input type="text" class="form-control" name="fantasia" id="fantasia" placeholder="Nome fantasia" required>
   </div>
+
   <div class="form-group mx-sm-3 mb-2">
-    <label for="inputStatus" class="sr-only">Status</label>
-    <input type="text" class="form-control" id="inputStatus" placeholder="Status">
+    <select class="custom-select" name="status_emp" id="status_emp">
+      <option value="ATIVO">ATIVO</option>
+      <option value="INATIVO">INATIVO</option>
+      <option value="CANCELADO">CANCELADO</option>
+    </select>
   </div>
+
   <div class="form-group mx-sm-3 mb-2">
     <label for="inputDoc" class="sr-only">Doc</label>
-    <input type="text" class="form-control" id="inputDoc" placeholder="Doc">
+    <input type="text" class="form-control" name="doc" id="inputDoc" placeholder="Doc" max="14" required>
   </div>
   <div class="form-group mx-sm-3 mb-2">
-    <button type="button" class="btn btn-success">Salvar</button>
+    <button type="submit" class="btn btn-success">Salvar</button>
   </div>
 </form>
 
