@@ -7,6 +7,7 @@ $listarPesquisa = listarPesquisa();
 include "app".DIRECTORY_SEPARATOR."operacoes".DIRECTORY_SEPARATOR."empresas.operacoes.php";
 
 ?>
+
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">
         Pesquisa
@@ -75,12 +76,12 @@ include "app".DIRECTORY_SEPARATOR."operacoes".DIRECTORY_SEPARATOR."empresas.oper
       <td><?=$pesquisa['fantasia']?></td>
       <td><?=$pesquisa['populacao']?></td>
       <td>
+        
         <a href="" class="btn btn-primary">Editar</a>
-        <a href="" class="btn btn-danger">Excluir</a>
+        <a onclick="swal( 'Oops' ,  'Something went wrong!' ,  'error' )" class="btn btn-danger">Excluir</a>
       </td>
     </tr>
     <?php } ?>
-
 
   </tbody>
 </table>
