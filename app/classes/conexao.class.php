@@ -10,7 +10,7 @@ class Conexao {
 
     private $banco;
 
-    public function __construct($usuario = "root", $senha = "", $host = "localhost", $banco = 'projeto') {
+    public function __construct($usuario = "root", $senha = "", $host = "localhost", $banco = 'proj_senac') {
         $this->usuario = $usuario;
         $this->senha = $senha;
         $this->host = $host;
@@ -39,4 +39,16 @@ class Conexao {
         
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
+
+    public function runq(string $query) {
+        $conn = $this->conexao();
+        $result = mysqli_query($conn, $query);
+
+        if (!$result){
+            die('Erro ao consultar');
+        }
+
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
 }
+
