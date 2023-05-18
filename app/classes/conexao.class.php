@@ -34,7 +34,8 @@ class Conexao {
         $result = mysqli_query($conn, "SELECT * FROM ".$tabela);
         
         if (!$result) {
-            die('Erro ao consultar');
+            die('Erro ao consultar !!!');
+
         }
         
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
