@@ -1,25 +1,19 @@
 <?php
-$redir = 1;
-
-if (!isset($conexao)){
-    include ('../config/config.php');
-    // MECHER AQUI
-}
 
 
-function  listarPesquisa(){
-    $conexao = new Conexao();
-    $query = "SELECT p.id_pesq, p.nome_pesq, p.data_inicio, p.data_fim, e.fantasia, p.populacao 
+
+function  listarPesquisa(Conexao $conexao){
+    $query = "SELECT p.id, p.nome_pesq, p.data_inicio, p.data_fim, e.fantasia, p.populacao 
             FROM pesquisas as p  
             LEFT JOIN empresas as e 
-            ON p.empresa = e.id_emp";
+            ON p.empresa = e.id_emp
+            WHERE p.excluido_em IS NULL;";
             
     return $conexao->runQuery($query);
 
 }
 
-function inputPesquisa() {
-    $conexao = new Conexao();
+function inputPesquisa(Conexao $conexao) {
     $query = "SELECT *
               FROM pesquisas
               WHERE nome_pesq = '".$_POST['nome_pesq']."' AND empresa = ".$_POST['empresa']." AND data_inicio = '".$_POST['data_inicio']."'";
@@ -36,9 +30,23 @@ function inputPesquisa() {
     if ($result <= 0){
         $conexao->insertQuery($query);
     }
+
 }
 
-if (isset($_POST['nome_pesq'])){
-    inputPesquisa();
-    header($config["url"]."index.php?page=pesquisa");
+
+
+function deletePesquisa(int $id, Conexao $conexao) {
+    if ($conexao->deleteByID("pesquisas", $id)){
+        return [
+            "mensagem" => "Sucesso no delete!",
+            "excluido" => $conexao->findOne("pesquisas", $id)
+        ];
+    }
+
+    return [
+        "mensagem" => "Erro no delete!",
+        "nao_excluido" => $conexao->findOne("pesquisas", $id)
+    ];
 }
+
+

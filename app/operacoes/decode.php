@@ -33,7 +33,7 @@ $pass_decode = strrev($pass_decode);
 
 date_default_timezone_set('America/Sao_Paulo');
 
-include('conexao.php');
+include('login.valid.php');
 
 if($pass_valid == 1){
     $_SESSION['login'] = $mail_decode;
@@ -43,10 +43,10 @@ if($pass_valid == 1){
     $result = mysqli_query($conn, $sql);
     $dados = mysqli_fetch_array($result);
     $_SESSION['dados_usuario'] = $dados; 
-    $_SESSION['id'] = $dados[0];
-    mysqli_query($conn, "INSERT INTO `acess_logs`(`usuario`, `acess_date`, `acess_time`, `way`) VALUES ('$id',now(), now(), 'IN')");
-    header('Location:../index.php');
+    $_SESSION['user_id'] = $dados[0];
+    mysqli_query($conn, "INSERT INTO `acess_logs`(`usuario`, `acess_date`, `acess_time`, `way`) VALUES ($dados[0],now(), now(), 'IN')");
+    header('Location: http://localhost/projeto_integrador_senac/index.php');
 }else{
     $_SESSION['nao_autenticado'] = true;
-    header('Location: login.php');
+    header('Location: http://localhost/projeto_integrador_senac/template/login.php');
 }

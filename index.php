@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(!$_SESSION['pass']) {
-        header('Location: php/login.php');
+        header('Location: ./template/login.php');
         exit();
     }
 ?>
@@ -89,7 +89,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="php/logout.php">Logout</a>
+                    <a class="btn btn-primary" href="./app/operacoes/logout.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -113,6 +113,97 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.datatable').DataTable();
+        });
+    </script>
+
+    <script type="text/javascript">
+      
+      function deletePesq(id){
+        swal({
+              title: "Tem certeza que deseja deletar?",
+              text: "Uma vez deletada, você não poderá recuperar mais a pesquisa!",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+              })
+              .then((willDelete) => {
+                if (willDelete) {
+                  //COISA AQUI PRA FAZER
+                  $.ajax({
+                    method: "POST",
+                    data: {"id":id, "op":2},
+                    url:"http://localhost/projeto_integrador_senac/app/operacoes/pesquisa-op.php",
+                    success:function (data){
+                       swal("Sua pesquisa foi deletada com sucesso!", {
+                            icon: "success",
+                        });
+                        $("#tbl_pesquisa_"+id).remove()
+                    },
+                    error:function (error){
+                      console.error("Erro!", error);
+                    }
+                  })
+                  // swal("Sua pesquisa foi deletada com sucesso!", {
+                  //   icon: "success",
+                  // });
+                } 
+              });
+        }
+
+
+        $.ajax({
+            method: "POST",
+            data: {"op":0},
+            url:"http://localhost/projeto_integrador_senac/app/operacoes/pesquisa-op.php",
+            success:function(data){
+                console.log("Sucesso",data)
+            }
+        })
+
+        
+        $(document).ready(
+
+            $.ajax({
+            method: "GET",
+            url:"http://localhost/projeto_integrador_senac/app/operacoes/pesquisa-op.php?operacao=listagem",
+            success:function(data){
+                console.log("Sucesso",data)
+
+                let tabela = ``;
+                data.forEach(element => {
+
+                    tabela += `<tr id="tbl_pesquisa_${element.id}" >
+                            <td>${element.id}</td>
+                            <td>após id_option</td>
+                            <td>17/05/2023</td>
+                            <td>31/05/2023</td>
+                            <td>Athos RH</td>
+                            <td>32</td>
+                            <td>
+                                <a href="" class="btn btn-primary">Editar</a>
+                                <a onclick="deletePesq(${element.id})" class="btn btn-danger">Excluir</a>
+                            </td>
+                            </tr> `
+                        });
+
+                $("#tabela-pesquisa").html(tabela);
+            },
+            error :function (err) {
+                console.log(err.responseText);
+            }
+        })
+
+        )
+    </script>
+
+
+    
 
 </body>
 
