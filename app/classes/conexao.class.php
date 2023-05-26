@@ -10,7 +10,7 @@ class Conexao {
 
     private $banco;
 
-    public function __construct($usuario = "root", $senha = "", $host = "localhost", $banco = 'proj_senac') {
+    public function __construct($usuario = "root", $senha = "", $host = "localhost", $banco = 'projeto') {
         $this->usuario = $usuario;
         $this->senha = $senha;
         $this->host = $host;
