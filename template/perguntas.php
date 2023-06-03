@@ -1,10 +1,11 @@
 <?php 
   include "app/classes/conexao.class.php";
   $conexao = new conexao();
-  
-  $lista_perguntas = $conexao->runq("select * from perguntas where excluido_em IS NULL");
 
-  $lista_perguntas_contagem = $conexao->runq("SELECT perguntas.*, COUNT(options.id) AS total_options FROM perguntas LEFT JOIN options ON perguntas.id = options.pergunta_id GROUP BY perguntas.id");
+  $lista_perguntas_contagem = $conexao->runQuery("SELECT perguntas.*, COUNT(options.id) AS total_options FROM perguntas LEFT JOIN options ON perguntas.id = options.pergunta_id GROUP BY perguntas.id");
+
+  $lista_perguntas = $conexao->runQuery("SELECT id, descricao FROM perguntas");
+
 
 ?>
 
@@ -35,9 +36,9 @@
 <label for="status">Ou selecione uma pergunta já existente:</label>
    <br><select name="pergunta_id" id="pergunta_id" class="dropdown-item"  >
       
-    <option valu="0">Selecione uma opção</option>
+    <option value="0">Selecione uma opção</option>
     <?php foreach($lista_perguntas as $pergunta) { 
-        echo '<option value="'.$pergunta["descricao"].'">'.$pergunta["descricao"]."</option>";
+        echo '<option value="'.$pergunta["id"].'">'.$pergunta["descricao"]."</option>";
       }
     ?>
 
@@ -92,6 +93,7 @@ document.getElementById('registrar_pergunta').addEventListener("click", function
   
   let dados = { 
     "titulo_pergunta": $("#titulo_pergunta").val(),
+    "pergunta_id" : $("#pergunta_id").val(),
     "resposta_pergunta": $('input[name="resposta_pergunta[]"]').map(function() {
       return this.value;
     }).get(),
@@ -99,11 +101,26 @@ document.getElementById('registrar_pergunta').addEventListener("click", function
   };
 
   $.ajax({
-    url: url,
+    url: url+'',
     data: dados,
     method: "POST",
     success: function(data) {
-      console.log('sucesso', data);
+      swal("Registro Salvo com sucesso !!!", {
+        buttons: {
+          catch: {
+            text: "Sucesso ao Salvar !",
+            value: "catch",
+          }
+        },
+      })
+      .then((value) => {
+        switch (value) {
+          case "catch":
+            swal("Sucesso !", "Ok Vamos nessa!", "success");
+            //setTimeout(() => { window.location.reload() }, 3000);
+            break;
+        }
+      });
     }, 
     error: function(error) {
       console.log('error', error);
@@ -111,12 +128,40 @@ document.getElementById('registrar_pergunta').addEventListener("click", function
   });
     
 })
+
+function mostrar_opcoes(id_pergunta) {
+  let titulo_pergunta = $("#opcao_"+id_pergunta).html();
+  $('#titulo_modal_opcoes').html(titulo_pergunta);
+  $('#modal_perguntas').modal('toggle')
+
+  $.ajax({
+    method: 'GET',
+    url: 'http://localhost/projeto_integrador_senac/app/operacoes/perguntas.operacoes.php?pesquisar=true&id=' + id_pergunta, 
+    success: function (data) {
+      
+      let dados = JSON.parse(data);
+
+      let listaOp = "";
+      for (let i = 0; i < dados.length; i++) {
+        listaOp += `<li class="list-group-item">${dados[i].descricao}</li>`;
+      }
+
+      $("#lista_opcoes_perguntas").html(listaOp);
+    }, 
+    error: function (error) {
+      alert("Error");
+      console.log(error);
+    }
+  })
+
+
+}
 </script>
 
 </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
     
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped datatable">
       <thead>
         <tr>
           <th>ID</th>
@@ -130,11 +175,12 @@ document.getElementById('registrar_pergunta').addEventListener("click", function
       <?php foreach($lista_perguntas_contagem as $pergunta) { 
         echo "<tr>
                 <td>{$pergunta["id"]}</td>
-                <td>{$pergunta["descricao"]}</td>
+                <td id='opcao_{$pergunta["id"]}'>{$pergunta["descricao"]}</td>
                 <td>{$pergunta["total_options"]}</td>
                 <td>
-                  <button type='button' class='btn btn-primary'>Editar</button> 
-                  <button type='button' class='btn btn-danger'>Excluir</button> 
+                  <button type='button' class='btn btn-primary'><i class='fas fa-pen'></i></button> 
+                  <button type='button' class='btn btn-danger'><i class='fas fa-trash'></i></button> 
+                  <button type='button' class='btn btn-info' onclick='mostrar_opcoes({$pergunta["id"]})'><i class='fas fa-eye'></i></button>
                 </td>
               </tr>";
         }
@@ -142,10 +188,31 @@ document.getElementById('registrar_pergunta').addEventListener("click", function
       </tbody>
     </table>
 
+  </div>
+</div>
 
+<!-- Modal -->
+<div class="modal fade" id="modal_perguntas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="titulo_modal_opcoes">----</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          
+      <div class="card">
+        <ul class="list-group list-group-flush" id="lista_opcoes_pergunta">
+        </ul>
+      </div>
 
-
-
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
   </div>
 </div>
 
