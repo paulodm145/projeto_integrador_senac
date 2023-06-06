@@ -61,7 +61,7 @@
                                         endif;
                                         unset($_SESSION['nao_autenticado']);
                                     ?>
-                                    <form class="user" id="UserForm" method="POST" action="../php/decode.php">
+                                    <form class="user" id="UserForm" method="POST" action="..\app\operacoes\decode.php">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                 id="InputEmail" aria-describedby="emailHelp"

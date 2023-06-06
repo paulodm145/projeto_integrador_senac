@@ -1,10 +1,7 @@
 <!-- Page Heading -->
 <?php 
 
-include "app\config\config.php";
-include "app\operacoes\pesquisa.operacoes.php";
-$listarPesquisa = listarPesquisa();
-include "app".DIRECTORY_SEPARATOR."operacoes".DIRECTORY_SEPARATOR."empresas.operacoes.php";
+// include "app".DIRECTORY_SEPARATOR."operacoes".DIRECTORY_SEPARATOR."empresas.operacoes.php";
 
 ?>
 
@@ -34,11 +31,7 @@ include "app".DIRECTORY_SEPARATOR."operacoes".DIRECTORY_SEPARATOR."empresas.oper
 
       <option value=""  disabled selected>Selecione uma empresa</option>
 
-      <?php foreach($listarEmpresas as $empresa){?>
-
-      <option value=<?=$empresa['empresa']?>><?=$empresa['fantasia']?></option>
-
-      <?php } ?>
+      <option value="empresa"></option>
 
     </select>
   </div>
@@ -46,14 +39,14 @@ include "app".DIRECTORY_SEPARATOR."operacoes".DIRECTORY_SEPARATOR."empresas.oper
     <label for="inputPopulacao" class="sr-only">População</label>
     <input required name="populacao" type="number" class="form-control" id="inputPopulacao" placeholder="População">
   </div>
-  <!-- <input type="hidden" id="" name="operacao" value="1"> -->
+  <input type="hidden" id="op1" name="op" value="1">
   <button type="submit" class="btn btn-primary mb-2">Enviar</button>
 </form>
 </div>
 
-<div class="row">
+<div class="container-fluid">
 
-<table class="table table-striped table-bordered mt-3">
+<table class="table datatable">
   <thead class="thead-dark">
   <tr>
       <th scope="col">ID</th>
@@ -65,24 +58,21 @@ include "app".DIRECTORY_SEPARATOR."operacoes".DIRECTORY_SEPARATOR."empresas.oper
       <th scope="col">Ações</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="tabela-pesquisa">
 
-  <?php foreach($listarPesquisa as $chave => $pesquisa) { ?>
-    <tr>
-      <td><?php echo $pesquisa['id_pesq']?></td>
-      <td><?=$pesquisa['nome_pesq']?></td>
-      <td><?=date('d/m/Y', strtotime($pesquisa['data_inicio']))?></td>
-      <td><?=date('d/m/Y', strtotime($pesquisa['data_fim']))?></td>
-      <td><?=$pesquisa['fantasia']?></td>
-      <td><?=$pesquisa['populacao']?></td>
+     <tr>
+      <td>4</td>
+      <td>após id_option</td>
+      <td>17/05/2023</td>
+      <td>31/05/2023</td>
+      <td>Athos RH</td>
+      <td>32</td>
       <td>
         
         <a href="" class="btn btn-primary">Editar</a>
-        <a onclick="swal( 'Oops' ,  'Something went wrong!' ,  'error' )" class="btn btn-danger">Excluir</a>
+        <a onclick="deletePesq(4)" class="btn btn-danger">Excluir</a>
       </td>
-    </tr>
-    <?php } ?>
-
+    </tr> 
   </tbody>
 </table>
 </div>

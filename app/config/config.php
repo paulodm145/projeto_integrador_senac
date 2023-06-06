@@ -13,7 +13,7 @@ if(isset($redir)){
 }
 
 
-$path = ".\app\classes\conexao.class.php";
+$path = "../classes/conexao.class.php";
 include $path;
 $conexao = new Conexao();
 
