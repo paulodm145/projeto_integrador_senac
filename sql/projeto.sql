@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27-Maio-2023 às 01:36
+-- Tempo de geração: 07-Jun-2023 às 00:31
 -- Versão do servidor: 10.4.11-MariaDB
 -- versão do PHP: 7.4.5
 
@@ -52,7 +52,10 @@ INSERT INTO `acess_logs` (`log`, `way`, `usuario`, `acess_date`, `acess_time`) V
 (13, 'IN', 1, '2023-04-17', '12:11:37'),
 (14, 'OUT', 1, '2023-04-17', '12:12:07'),
 (15, 'IN', 1, '2023-05-05', '19:21:37'),
-(16, 'OUT', 1, '2023-05-05', '19:34:00');
+(16, 'OUT', 1, '2023-05-05', '19:34:00'),
+(27, 'IN', 3, '2023-06-01', '19:06:32'),
+(28, 'IN', 3, '2023-06-02', '19:00:01'),
+(29, 'IN', 3, '2023-06-06', '19:03:03');
 
 -- --------------------------------------------------------
 
@@ -175,7 +178,40 @@ INSERT INTO `options` (`id`, `descricao`, `pergunta_id`, `excluido_em`) VALUES
 (72, 'Folga no dia do aniversario', 1, NULL),
 (73, 'Bolsa de estudos ', 1, NULL),
 (74, 'Participação nos lucros', 1, NULL),
-(75, 'Bônus de participação', 1, NULL);
+(75, 'Bônus de participação', 1, NULL),
+(76, 'op 01', 27, NULL),
+(77, 'op 02', 27, NULL),
+(78, 'op 03', 27, NULL),
+(79, '', 28, NULL),
+(80, 'op 01', 29, NULL),
+(81, 'op 02', 29, NULL),
+(82, 'op 03', 29, NULL),
+(83, 'op 01', 30, NULL),
+(84, 'op 02', 30, NULL),
+(85, 'op 03', 30, NULL),
+(86, 'op 04', 30, NULL),
+(87, 'op 01', 31, NULL),
+(88, 'op 02', 31, NULL),
+(89, 'op 03', 31, NULL),
+(90, 'op 04', 31, NULL),
+(91, 'op 01', 32, NULL),
+(92, 'op 02', 32, NULL),
+(93, 'op 03', 32, NULL),
+(94, 'op 01', 33, NULL),
+(95, 'op 02', 33, NULL),
+(96, 'op 3', 33, NULL),
+(97, 'NÃO', 34, NULL),
+(98, 'SIM', 34, NULL),
+(99, 'RARAMENTE', 34, NULL),
+(100, 'AS VEZES', 34, NULL),
+(101, 'NÃO', 35, NULL),
+(102, 'SIM', 35, NULL),
+(103, 'NÃO', 36, NULL),
+(104, 'SIM', 36, NULL),
+(105, 'NÃO', 37, NULL),
+(106, 'SIM', 37, NULL),
+(107, 'Sim', 2, NULL),
+(108, 'Não', 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -212,7 +248,25 @@ INSERT INTO `perguntas` (`id`, `descricao`, `excluido_em`) VALUES
 (16, 'COMO VOCÊ AVALIA A PREOCUPAÇÃO DA EMPRESA COM SUA SEGURANÇA NO TRABALHO?', NULL),
 (17, 'SINTO-ME BEM INFORMADO SOBRE O QUE ACONTECE NA EMPRESA?', NULL),
 (18, 'VOCÊ SE SENTE SATISFEITO EM TRABAHAR NA EMPRESA COM TUDO O QUE LHE É OFERECIDO?', NULL),
-(19, 'ENTRE OS BENEFÍCIOS A SEGUIR, QUAL VOCÊ ESCOLHERIA?', NULL);
+(19, 'ENTRE OS BENEFÍCIOS A SEGUIR, QUAL VOCÊ ESCOLHERIA?', NULL),
+(20, 'Pergunta Teste', NULL),
+(21, 'Titulo de Teste', NULL),
+(22, 'Titulo de Teste', NULL),
+(23, '', NULL),
+(24, 'Pergunta Teste 2', NULL),
+(25, 'Pergunta Teste 2', NULL),
+(26, 'Teste', NULL),
+(27, 'Pergunta Teste 21', NULL),
+(28, '', NULL),
+(29, 'Quem Descobriu o Brasil', NULL),
+(30, 'Teste', NULL),
+(31, 'Teste', NULL),
+(32, 'Teste', NULL),
+(33, 'Pergunta Teste', NULL),
+(34, '', NULL),
+(35, '', NULL),
+(36, '', NULL),
+(37, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -333,7 +387,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `acess_logs`
 --
 ALTER TABLE `acess_logs`
-  MODIFY `log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de tabela `chaves`
@@ -363,13 +417,13 @@ ALTER TABLE `itens_pesq`
 -- AUTO_INCREMENT de tabela `options`
 --
 ALTER TABLE `options`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT de tabela `perguntas`
 --
 ALTER TABLE `perguntas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de tabela `pesquisas`
