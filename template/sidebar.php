@@ -84,9 +84,9 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="index.php?page=empresa">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Gráficos</span></a>
+                    <span>Empresas</span></a>
             </li>
 
             <!-- Nav Item - Tables -->

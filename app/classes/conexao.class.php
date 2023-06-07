@@ -10,7 +10,7 @@ class Conexao {
 
     private $banco;
 
-    public function __construct($usuario = "root", $senha = "", $host = "localhost", $banco = 'projeto') {
+    public function __construct($usuario = "root", $senha = "", $host = "localhost", $banco = 'cadastro') {
         $this->usuario = $usuario;
         $this->senha = $senha;
         $this->host = $host;
@@ -44,8 +44,8 @@ class Conexao {
         $conn = $this->conexao();
         $result = mysqli_query($conn, $query);
 
-        if (!$result){
-            die('Erro ao consultar');
+        if (!$result) {
+            echo ('Erro ao consultar');
         }
 
         return mysqli_fetch_all($result, MYSQLI_ASSOC);

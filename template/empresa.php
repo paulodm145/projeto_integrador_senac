@@ -1,5 +1,10 @@
 <?php 
-include "app".DIRECTORY_SEPARATOR."operacoes".DIRECTORY_SEPARATOR."empresa.operacoes.php";
+//include "app".DIRECTORY_SEPARATOR."operacoes".DIRECTORY_SEPARATOR."empresa.operacoes.php"; 
+include "app/classes/conexao.class.php";
+
+$conexao = new conexao();
+
+$listarEmpresa = $conexao->runQuery("SELECT * FROM EMPRESAS WHERE excluido_em IS NULL");
 ?>
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -55,8 +60,8 @@ include "app".DIRECTORY_SEPARATOR."operacoes".DIRECTORY_SEPARATOR."empresa.opera
       <tr>
         <td><?php echo $empresa['razao']; ?></td>
         <td><?php echo $empresa['fantasia']; ?></td>
-        <td><?php echo $empresa['status_emp']; ?></td>
-        <td><?php echo $empresa['doc']; ?> 
+        <td><?php echo $empresa['status']; ?></td>
+        <td><?php echo $empresa['documento']; ?> 
         <td>
           <button type="button" class="btn btn-primary">Editar</button>
           <button type="button" class="btn btn-danger">Excluir</button>

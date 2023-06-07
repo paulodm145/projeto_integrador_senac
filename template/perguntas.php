@@ -1,11 +1,11 @@
 <?php 
   include "app/classes/conexao.class.php";
+  
   $conexao = new conexao();
 
   $lista_perguntas_contagem = $conexao->runQuery("SELECT perguntas.*, COUNT(options.id) AS total_options FROM perguntas LEFT JOIN options ON perguntas.id = options.pergunta_id GROUP BY perguntas.id");
-
+ 
   $lista_perguntas = $conexao->runQuery("SELECT id, descricao FROM perguntas");
-
 
 ?>
 
