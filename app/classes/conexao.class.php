@@ -87,8 +87,10 @@ class Conexao {
         ");
     }
 
-
-
+    public function editQuery(string $sql ) {
+        $conn = $this->conexao();
+        return mysqli_query($conn, $sql);
+    }
 
 }
 
