@@ -46,7 +46,7 @@
 
                         if (!isset($_GET["page"])) {
                             include 'template/pagina-inicial.php';
-                        } 
+                        }
                     ?>
                 </div>
                 <!-- /.container-fluid -->
@@ -116,6 +116,9 @@
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
 
+    <?php
+    if ($page == "pesquisa"){
+    ?>
     <script>
         $(document).ready(function () {
             $('.datatable').DataTable();
@@ -162,47 +165,102 @@
             data: {"op":0},
             url:"http://localhost/projeto_integrador_senac/app/operacoes/pesquisa-op.php",
             success:function(data){
-                console.log("Sucesso",data)
-            }
-        })
-
-        
-        $(document).ready(
-
-            $.ajax({
-            method: "GET",
-            url:"http://localhost/projeto_integrador_senac/app/operacoes/pesquisa-op.php?operacao=listagem",
-            success:function(data){
-                console.log("Sucesso",data)
+                // console.log("Sucesso",data)
 
                 let tabela = ``;
                 data.forEach(element => {
 
                     tabela += `<tr id="tbl_pesquisa_${element.id}" >
                             <td>${element.id}</td>
-                            <td>após id_option</td>
-                            <td>17/05/2023</td>
-                            <td>31/05/2023</td>
-                            <td>Athos RH</td>
-                            <td>32</td>
+                            <td>${element.nome_pesq}</td>
+                            <td>${element.data_inicio}</td>
+                            <td>${element.data_fim}</td>
+                            <td>${element.fantasia}</td>
+                            <td>${element.populacao}</td>
                             <td>
                                 <a href="" class="btn btn-primary">Editar</a>
                                 <a onclick="deletePesq(${element.id})" class="btn btn-danger">Excluir</a>
                             </td>
                             </tr> `
                         });
-
-                $("#tabela-pesquisa").html(tabela);
+                    
+                    $("#tabela-pesquisa").html(tabela);
             },
             error :function (err) {
                 console.log(err.responseText);
             }
         })
 
-        )
+
+
+
+        $.ajax({
+            method: "POST",
+            data: {"op":3, "id":<?=$_SESSION['id']?>},
+            url:"http://localhost/projeto_integrador_senac/app/operacoes/pesquisa-op.php",
+            success:function(data){
+                // console.log("Sucesso",data[0]['fantasia'])
+                let inner = $("#selectEmpresa").html();
+
+                let list = ``;
+                data.forEach(element => {
+
+                    list += `<option value=${data[0]['empresa']}>${data[0]['fantasia']}</option>`
+                        });
+                    
+                $("#selectEmpresa").html(inner+list);
+            },
+            error :function (err) {
+                console.log(err.responseText);
+            }
+        })
+
+
+
+        
     </script>
+<?php
+    }
+?>
 
 
+<?php  if ($page == "charts"){ ?>
+
+<script>
+            $.ajax({
+            method: "POST",
+            data: {"op":0},
+            url:"http://localhost/projeto_integrador_senac/app/operacoes/dashboard-op.php",
+            success:function(data){
+                // console.log("Sucesso", data)
+                $("#titulo-pesquisa").html(data)
+            },
+            error :function (err) {
+                console.log(err.responseText);
+            }
+        })
+
+        $.ajax({
+            method: "POST",
+            data: {"op":2},
+            url:"http://localhost/projeto_integrador_senac/app/operacoes/dashboard-op.php",
+            success:function(data){
+                console.log("Sucesso", data)
+                
+                $("#card1").html("PERÍODO");
+                let value = new Date(data['card1']['data_inicio']).toLocaleDateString()+ " à "+ new Date(data['card1']['data_fim']).toLocaleDateString();
+                $("#card1_value").html(value);
+                $("#card2").html("POPULAÇÃO ESTIMADA")
+                $("#card2_value").html(data['card1']['populacao'])
+                // console.log(value);
+            },
+            error :function (err) {
+                console.log(err.responseText);
+            }
+        })
+</script>
+
+<?php } ?>
     
 
 </body>

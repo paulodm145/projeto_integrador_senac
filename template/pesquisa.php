@@ -12,7 +12,7 @@
 </div>
 
 <div class="row">
-<form class="form-inline" method="POST" action="<?=$config['url']."app/operacoes/pesquisa.operacoes.php"?>">
+<form class="form-inline" method="POST" action="http://localhost/projeto_integrador_senac/app/operacoes/pesquisa-op.php">
   <div class="form-group mx-sm-3 mb-2">
     <label for="inputNome" class="sr-only">Nome</label>
     <input required name="nome_pesq" type="text" class="form-control" id="inputNome" placeholder="Nome">
@@ -31,8 +31,6 @@
 
       <option value=""  disabled selected>Selecione uma empresa</option>
 
-      <option value="empresa"></option>
-
     </select>
   </div>
   <div class="form-group mx-sm-3 mb-2">
@@ -46,7 +44,7 @@
 
 <div class="container-fluid">
 
-<table class="table datatable">
+<table class="table">
   <thead class="thead-dark">
   <tr>
       <th scope="col">ID</th>
@@ -58,21 +56,7 @@
       <th scope="col">Ações</th>
     </tr>
   </thead>
-  <tbody id="tabela-pesquisa">
-
-     <tr>
-      <td>4</td>
-      <td>após id_option</td>
-      <td>17/05/2023</td>
-      <td>31/05/2023</td>
-      <td>Athos RH</td>
-      <td>32</td>
-      <td>
-        
-        <a href="" class="btn btn-primary">Editar</a>
-        <a onclick="deletePesq(4)" class="btn btn-danger">Excluir</a>
-      </td>
-    </tr> 
+  <tbody id="tabela-pesquisa"> 
   </tbody>
 </table>
 </div>
