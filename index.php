@@ -245,13 +245,19 @@
             data: {"op":2},
             url:"http://localhost/projeto_integrador_senac/app/operacoes/dashboard-op.php",
             success:function(data){
-                console.log("Sucesso", data)
+                // console.log("Sucesso", data)
                 
                 $("#card1").html("PERÍODO");
                 let value = new Date(data['card1']['data_inicio']).toLocaleDateString()+ " à "+ new Date(data['card1']['data_fim']).toLocaleDateString();
                 $("#card1_value").html(value);
                 $("#card2").html("POPULAÇÃO ESTIMADA")
                 $("#card2_value").html(data['card1']['populacao'])
+                let width = (data['card2']['aceite'] / data['card1']['populacao'])*100
+                // console.log(width);
+                $('#followLabel').html(`${width}%`)
+                $('#card3').attr("style", `width: ${width}%`)
+                let pending = (data['card1']['populacao']-data['card2']['aceite']);
+                $('#card4').html(pending)
                 // console.log(value);
             },
             error :function (err) {
