@@ -43,9 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')  {
     exit();
 }
 
-
-
-
 if  ($_SERVER['REQUEST_METHOD'] === 'DELETE')  {
 
     $conn->deleteByID('empresas', $_GET['id']);
@@ -59,9 +56,8 @@ if  ($_SERVER['REQUEST_METHOD'] === 'DELETE')  {
     exit();
 }
 
-if  ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id']))  {
-
-    $dados = $conn->runQuery('SELECT * FROM empresas WHERE id='.$_GET['id']);
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id']))  {
+    $dados = $conn->deleteByID('perguntas', $_GET['id']);
     echo json_encode($dados);
     exit();
 }

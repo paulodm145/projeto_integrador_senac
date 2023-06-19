@@ -84,7 +84,8 @@ function duplicarPergunta() {
 }
 
 function removerPergunta(idDivPergunta) {
-  $(`#${idDivPergunta}`).remove();
+  console.log(`#opcao_${idDivPergunta}`);
+  $(`#opcao_${idDivPergunta}`).remove();
 }
 
 document.getElementById('registrar_pergunta').addEventListener("click", function() {
@@ -130,9 +131,9 @@ document.getElementById('registrar_pergunta').addEventListener("click", function
 })
 
 function mostrar_opcoes(id_pergunta) {
-  let titulo_pergunta = $("#opcao_"+id_pergunta).html();
+  let titulo_pergunta = $("#opcao_"+id_pergunta).data('titulo');
   $('#titulo_modal_opcoes').html(titulo_pergunta);
-  $('#modal_perguntas').modal('toggle')
+  $('#modal_perguntas').modal('toggle');
 
   $.ajax({
     method: 'GET',
@@ -140,13 +141,15 @@ function mostrar_opcoes(id_pergunta) {
     success: function (data) {
       
       let dados = JSON.parse(data);
-
+      
       let listaOp = "";
+      let j = 0;
       for (let i = 0; i < dados.length; i++) {
-        listaOp += `<li class="list-group-item">${dados[i].descricao}</li>`;
+        listaOp += `<li class="list-group-item">
+          <input type="radio" name="exemplo"> ${dados[j++].descricao}</li>`;
       }
-
-      $("#lista_opcoes_perguntas").html(listaOp);
+      console.log("mostrar opcoes", listaOp);
+      $("#lista_opcoes_pergunta").html(listaOp);
     }, 
     error: function (error) {
       alert("Error");
@@ -173,13 +176,13 @@ function mostrar_opcoes(id_pergunta) {
       <tbody>
 
       <?php foreach($lista_perguntas_contagem as $pergunta) { 
-        echo "<tr>
+        echo "<tr id='opcao_{$pergunta["id"]}' data-titulo='{$pergunta["descricao"]}'>
                 <td>{$pergunta["id"]}</td>
-                <td id='opcao_{$pergunta["id"]}'>{$pergunta["descricao"]}</td>
+                <td >{$pergunta["descricao"]}</td>
                 <td>{$pergunta["total_options"]}</td>
                 <td>
                   <button type='button' class='btn btn-primary'><i class='fas fa-pen'></i></button> 
-                  <button type='button' class='btn btn-danger'><i class='fas fa-trash'></i></button> 
+                  <button type='button' class='btn btn-danger' onclick='removerPergunta({$pergunta["id"]})'><i class='fas fa-trash'></i></button> 
                   <button type='button' class='btn btn-info' onclick='mostrar_opcoes({$pergunta["id"]})'><i class='fas fa-eye'></i></button>
                 </td>
               </tr>";

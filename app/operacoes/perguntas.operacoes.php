@@ -41,3 +41,10 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['pesquisar'] === "true")  {
     exit;
 }
 
+if ($_GET["op"] == "excluir" && isset($_GET["id"]) ) {
+    echo "alert(".$_GET["id"].")";
+    $sql = "SELECT * FROM cadastro WHERE perguntas =".$_GET["id"];
+    echo json_encode($conn->);
+    exit;
+}
+
