@@ -2,6 +2,22 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
+
+$.ajax({
+  method: "POST",
+  data: {"op":0},
+  url:"http://localhost/projeto_integrador_senac/app/operacoes/pesquisa-op.php",
+  success:function(data){
+      console.log("Sucesso",data);
+  },
+  error :function (err) {
+      console.log(err.responseText);
+  }
+})
+
+
+
+
 // Pie Chart Example
 var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {

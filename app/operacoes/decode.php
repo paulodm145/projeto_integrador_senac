@@ -39,11 +39,11 @@ if($pass_valid == 1){
     $_SESSION['login'] = $mail_decode;
     $_SESSION['pass'] = $pass_decode;
     //$sql = "SELECT user_id FROM usuarios WHERE email = '$mail_decode'";
-    $sql = "SELECT user_id, name, email FROM usuarios WHERE email = '$mail_decode'";
+    $sql = "SELECT id, name, email FROM usuarios WHERE email = '$mail_decode'";
     $result = mysqli_query($conn, $sql);
     $dados = mysqli_fetch_array($result);
     $_SESSION['dados_usuario'] = $dados; 
-    $_SESSION['user_id'] = $dados[0];
+    $_SESSION['id'] = $dados[0];
     mysqli_query($conn, "INSERT INTO `acess_logs`(`usuario`, `acess_date`, `acess_time`, `way`) VALUES ($dados[0],now(), now(), 'IN')");
     header('Location: http://localhost/projeto_integrador_senac/index.php');
 }else{
