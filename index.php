@@ -178,7 +178,7 @@
                             <td>${element.fantasia}</td>
                             <td>${element.populacao}</td>
                             <td>
-                                <a href="" class="btn btn-primary">Editar</a>
+                                <a href="http://localhost/projeto_integrador_senac/index.php?page=charts" class="btn btn-primary">Analisar</a>
                                 <a onclick="deletePesq(${element.id})" class="btn btn-danger">Excluir</a>
                             </td>
                             </tr> `
