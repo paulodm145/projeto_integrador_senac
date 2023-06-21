@@ -10,7 +10,7 @@ class Conexao {
 
     private $banco;
 
-    public function __construct($usuario = "root", $senha = "", $host = "localhost", $banco = 'proj_senac') {
+    public function __construct($usuario = "root", $senha = "", $host = "localhost", $banco = 'cadastro') {
         $this->usuario = $usuario;
         $this->senha = $senha;
         $this->host = $host;
@@ -44,8 +44,8 @@ class Conexao {
         $conn = $this->conexao();
         $result = mysqli_query($conn, $query);
 
-        if (!$result){
-            die('Erro ao consultar');
+        if (!$result) {
+            echo ('Erro ao consultar');
         }
 
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -54,7 +54,7 @@ class Conexao {
 
     public function insertQuery(string $query) {
         $conn = $this->conexao();
-        mysqli_query($conn, $query);
+        return mysqli_query($conn, $query);
     } 
 
     public function passValid(string $pass_decode, string $mail_decode) {
@@ -87,8 +87,10 @@ class Conexao {
         ");
     }
 
-
-
+    public function editQuery(string $sql ) {
+        $conn = $this->conexao();
+        return mysqli_query($conn, $sql);
+    }
 
 }
 
