@@ -6,7 +6,7 @@ include('../classes/conexao.class.php');
 $conexao = new Conexao();
 $conn = $conexao->conexao();
 
-$id = $_SESSION['user_id'];
+$id = $_SESSION['id'];
 date_default_timezone_set('America/Sao_Paulo');
 $date_decode = date("Y-m-d");
 $time_decode = date("H:i:s");

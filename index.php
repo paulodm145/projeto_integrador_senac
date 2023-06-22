@@ -258,7 +258,7 @@
                 $("#card2_value").html(data['card1']['populacao'])
                 let width = (data['card2']['aceite'] / data['card1']['populacao'])*100
                 // console.log(width);
-                $('#followLabel').html(`${width}%`)
+                $('#followLabel').html(`${width.toFixed(2)}%`)
                 $('#card3').attr("style", `width: ${width}%`)
                 let pending = (data['card1']['populacao']-data['card2']['aceite']);
                 $('#card4').html(pending)

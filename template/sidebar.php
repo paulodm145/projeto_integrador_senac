@@ -96,6 +96,14 @@
                     <span>Perguntas</span></a>
             </li>
 
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="?page=pesquisa">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Pesquisas</span></a>
+            </li>
+
+
             
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
